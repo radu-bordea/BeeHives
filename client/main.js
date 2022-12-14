@@ -1,4 +1,3 @@
-
 async function fetchData() {
   const url = "http://localhost:5000/api/temp";
   const response = await fetch(url);
@@ -6,60 +5,86 @@ async function fetchData() {
   return datapoints;
 }
 
-  fetchData().then((datapoints) => {
-    const temps = datapoints.map(function (index) {
-      return index.value;
-    });
-    const dates = datapoints.map(function (index) {
-      return index.timestamp.slice(0, 10);
-    });
-    console.log(temps);
-    console.log(dates);
+fetchData().then((datapoints) => {
+  const temps = [];
+  const weights = [];
 
-    let myChart = document.getElementById("myChart");
-
-    const checkboxTemp = document.getElementById("checkboxTemp");
-    let open = false;
-    checkboxTemp.addEventListener("click", () => {
-      let newDates;
-      let newTemps;
-      open = !open;
-      if (open) {
-        newDates = dates;
-        newTemps = temps;
-      }else{
-        newDates = []
-        newTemps = []
-      }
-
-                    new Chart(myChart, {
-                      type: "line",
-                      data: {
-                        labels: newDates,
-                        datasets: [
-                          {
-                            fill: false,
-                            lineTension: 0,
-                            backgroundColor: "rgba(0,0,255,1.0)",
-                            borderColor: "rgba(0,0,255,0.1)",
-                            data: newTemps,
-                          },
-                        ],
-                      },
-                      options: {
-                        legend: { display: false },
-                        scales: {
-                          yAxes: [{ ticks: { min: 0, max: 30 } }],
-                        },
-                      },
-                    });
-
-    });
-
-    const box = document.getElementById("box");
-    const graph = document.getElementById("graph");
-
-    graph.addEventListener("click", () => {
-      box.style.visibility = "visible";
-    });
+  const values = datapoints.map(function (index) {
+    if(index.deviceID == 1){
+      return temps.push(index.value);
+    }
+    if(index.deviceID == 2){
+      return weights.push(index.value);
+    }
   });
+  
+  const dates = datapoints.map(function (index) {
+    return index.timestamp.slice(0, 10);
+  });
+  const uniqueDates = [... new Set(dates)]
+  
+  console.log(temps);
+  console.log(weights);
+  console.log(uniqueDates);
+  console.log(dates);
+
+  let myChart = document.getElementById("myChart");
+  let openTemp = false;
+  let newTemps = [];
+  let openWeight = false;
+  let newWeights = [];
+
+  
+  const checkboxTemp = document.getElementById("checkboxTemp");
+  checkboxTemp.addEventListener("click", () => {
+    openTemp = !openTemp;
+    if (openTemp) {
+      newTemps = temps;
+    } else {
+      newTemps = []
+    }
+    showChart(newTemps, newWeights)
+  });
+  const checkboxWeight = document.getElementById("checkboxWeight");
+  checkboxWeight.addEventListener("click", () => {
+    openWeight = !openWeight;
+    if (openWeight) {
+      newWeights = weights;
+    } else {
+      newWeights = []
+    }
+    showChart(newTemps, newWeights)
+  });
+
+
+  function showChart(temps, weights){
+    new Chart("myChart", {
+      type: "line",
+      data: {
+        labels: uniqueDates,
+        datasets: [
+          {
+            data: temps,
+            borderColor: "red",
+            fill: false,
+          },
+          {
+            data: weights,
+            borderColor: "green",
+            fill: false,
+          },
+        ],
+      },
+      options: {
+        legend: { display: false },
+      },
+    });
+  }
+ 
+  const box = document.getElementById("box");
+  const graph = document.getElementById("graph");
+
+  graph.addEventListener("click", () => {
+    box.style.visibility = "visible";
+  });
+});

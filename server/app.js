@@ -23,7 +23,7 @@ app.use(cors())
 // create DB
 
 app.get("/api/temp", (req, res) => {
-  let sql = "SELECT * from measurements;";
+  let sql = "SELECT * from measurements";
   db.query(sql, (err, result) => {
     if (err) throw err;
     res.send(result);
