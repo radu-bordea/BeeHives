@@ -8,13 +8,17 @@ async function fetchData() {
 fetchData().then((datapoints) => {
   const temps = [];
   const weights = [];
+  const humidity = [];
 
   const values = datapoints.map(function (index) {
-    if(index.deviceID == 1){
+    if(index.deviceID === 1){
       return temps.push(index.value);
     }
-    if(index.deviceID == 2){
+    if(index.deviceID === 2){
       return weights.push(index.value);
+    }
+    if(index.deviceID === 3){
+      return humidity.push(index.value);
     }
   });
   
@@ -25,6 +29,7 @@ fetchData().then((datapoints) => {
   
   console.log(temps);
   console.log(weights);
+  console.log(humidity);
   console.log(uniqueDates);
   console.log(dates);
 
@@ -33,6 +38,8 @@ fetchData().then((datapoints) => {
   let newTemps = [];
   let openWeight = false;
   let newWeights = [];
+  let openHumidity = false;
+  let newHumidity = [];
 
   
   const checkboxTemp = document.getElementById("checkboxTemp");
@@ -43,8 +50,9 @@ fetchData().then((datapoints) => {
     } else {
       newTemps = []
     }
-    showChart(newTemps, newWeights)
+    showChart(newTemps, newWeights, humidity)
   });
+
   const checkboxWeight = document.getElementById("checkboxWeight");
   checkboxWeight.addEventListener("click", () => {
     openWeight = !openWeight;
@@ -53,11 +61,22 @@ fetchData().then((datapoints) => {
     } else {
       newWeights = []
     }
-    showChart(newTemps, newWeights)
+    showChart(newTemps, newWeights, humidity)
   });
 
+  const checkboxHumidity = document.getElementById("checkboxHumidity");
+  checkboxHumidity.addEventListener("click", () => {
+    openHumidity = !openHumidity;
+    if (openHumidity) {
+      newHumidity = humidity;
+    } else {
+      newHumidity = []
+    }
+    showChart(newTemps, newWeights, newHumidity)
+  })
 
-  function showChart(temps, weights){
+
+  function showChart(temps, weights, humidity){
     new Chart("myChart", {
       type: "line",
       data: {
@@ -73,10 +92,15 @@ fetchData().then((datapoints) => {
             borderColor: "green",
             fill: false,
           },
+          {
+            data: humidity,
+            borderColor: "blue",
+            fill: false,
+          },
         ],
       },
       options: {
-        legend: { display: false },
+        legend: { display: true},
       },
     });
   }
