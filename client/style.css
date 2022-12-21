@@ -3,15 +3,15 @@
     
 }*/
 
-body {
+body, footer {
     background: -webkit-gradient(linear, left top, left bottom, from(rgba(246, 226, 55, 0.936)), to(#f6f6bd)) fixed;
 }
 
 #box {
     border-radius: 10px;
     margin: 10% auto;
-    width: 100rem;
-    height: 60rem;
+    width: 50rem;
+    height: 50rem;
     visibility: hidden;
     background: white;
     padding: 2rem;
@@ -22,7 +22,7 @@ body {
 
 .panel{
     border: 1px solid black;
-    width: 80rem;
+    width: 40rem;
     height: 40rem;
 }
 
@@ -38,4 +38,46 @@ body,#line {
 
 #myChart{
     margin-top: 20%;
+}
+
+#temp {
+    color: red;
+    font-weight: bold;
+}
+
+#weight{
+    color: blue;
+    font-weight: bold;
+}
+
+#humidity{
+    color: green;
+    font-weight: bold;
+}
+
+i{
+    margin-right: 0.5rem;
+}
+
+/*Footer*/
+h4 {
+    writing-mode: vertical-lr;
+    font-size: 70px;
+    transform: rotate(180deg);
+    margin-left: 5rem;
+}
+
+hr {
+    background-color: gray;
+    height: 2px;
+    width: 50%;
+    margin-left: 0rem;
+}
+
+footer container-fluid {
+    width: 94%;
+}
+
+p {
+    font-size: 12px;
 }

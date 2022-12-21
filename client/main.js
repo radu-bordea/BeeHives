@@ -50,7 +50,7 @@ fetchData().then((datapoints) => {
     } else {
       newTemps = []
     }
-    showChart(newTemps, newWeights, humidity)
+    showChart(newTemps, newWeights, newHumidity)
   });
 
   const checkboxWeight = document.getElementById("checkboxWeight");
@@ -61,7 +61,7 @@ fetchData().then((datapoints) => {
     } else {
       newWeights = []
     }
-    showChart(newTemps, newWeights, humidity)
+    showChart(newTemps, newWeights, newHumidity)
   });
 
   const checkboxHumidity = document.getElementById("checkboxHumidity");
@@ -100,7 +100,7 @@ fetchData().then((datapoints) => {
         ],
       },
       options: {
-        legend: { display: true},
+        legend: { display: false},
       },
     });
   }

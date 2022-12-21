@@ -1,0 +1,63 @@
+body {
+    background-color: lightgrey;
+    margin: 0;
+    box-sizing: border-box;
+    font-size: 20px;
+}
+.container {
+    margin: 5% auto;
+    width: 50%;
+    background: gray;
+    color: wheat;
+    border-radius: 10px;
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 10px;
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5);
+}
+
+.imp{
+    background-color: gray;
+    width: 50%;
+    margin: 10px auto;
+}
+
+.imp label{
+    color: wheat;
+    font-weight: 500;
+    background-color: gray;
+}
+
+.imp input{
+    border-radius: 2px;
+    border: none;
+    padding: 5px;
+    font-size: 15px;
+    text-align: center;
+    width: 100%;
+}
+
+#home {
+    color: aqua;
+    margin-left: auto;
+}
+
+@media screen and (max-width: 550px) {
+    body{
+        font-size: 12px;
+    }
+
+    
+    .imp input{
+        font-size: 12px;
+        padding: 2px;
+    }
+
+    h1{
+        font-size: 15px;
+    }
+
+    #btn{
+        font-size: 10px !important;
+    }
+}
