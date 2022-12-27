@@ -45,22 +45,26 @@
     </div>
   </nav>
   <div class="box" id="box">
-    <div class="form-check form-check-inline" id="temp">
-      <input class="form-check-input" type="checkbox" id="checkboxTemp" value="option1">
-      <label class="form-check-label" for="inlineCheckbox1">Temperature <sup>°C</sup></label>
-    </div>
-    <div class="form-check form-check-inline" id="weight">
-      <input class="form-check-input" type="checkbox" id="checkboxWeight" value="option2">
-      <label class="form-check-label" for="inlineCheckbox2">Weight <sup>Kg</sup></label>
-    </div>
-    <div class="form-check form-check-inline" id="humidity">
-      <input class="form-check-input" type="checkbox" id="checkboxHumidity" value="option3">
-      <label class="form-check-label" for="inlineCheckbox3">Humidity <sup>g/m^3</sup></label>
-    </div>
-    <div class="panel">
-      <canvas id="myChart" style="width:100%;max-width:700px">
+    <div class="row">
+      <div class="col-3 devicelist" id="list-of-devices">
 
-      </canvas>
+        <br><br>
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" placeholder="type device ID" id="searchDevice">
+          <div class="input-group-append">
+            <button id="btnSearchDevice" class="btn btn-outline-secondary">Click</button>
+          </div>
+        </div>
+
+        <br>
+      </div>    
+      <div class="col-9">
+        <div class="panel" style="border: 1px solid red;">
+          <canvas id="myChart" style="width:100%;max-width:700px">
+    
+          </canvas>
+        </div>
+      </div>
     </div>
   </div>
 </div>

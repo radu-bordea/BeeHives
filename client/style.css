@@ -10,14 +10,14 @@ body, footer {
 #box {
     border-radius: 10px;
     margin: 10% auto;
-    width: 50rem;
+    width: 60rem;
     height: 50rem;
     visibility: hidden;
     background: white;
     padding: 2rem;
-    text-align: center;
     box-shadow: 1rem 1rem 2rem black;
     cursor: pointer;
+    background: lightgray;
 }
 
 .panel{
@@ -38,21 +38,6 @@ body,#line {
 
 #myChart{
     margin-top: 20%;
-}
-
-#temp {
-    color: red;
-    font-weight: bold;
-}
-
-#weight{
-    color: blue;
-    font-weight: bold;
-}
-
-#humidity{
-    color: green;
-    font-weight: bold;
 }
 
 i{
@@ -80,4 +65,31 @@ footer container-fluid {
 
 p {
     font-size: 12px;
+}
+
+.devicelist{
+    height: 40rem;
+    overflow: scroll;
+}
+
+.h6style{
+    width: 130px;
+    margin-top: 10px;
+    padding: 5px 10px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    border-bottom-style:double;
+}
+
+.device{
+    margin-top: 5px;  
+}
+
+.deviceBtn{
+    width: 160px;
+}
+
+#searchDevice{
+    width: 120px;
+    height: 40px;
+    padding: 5px;
 }

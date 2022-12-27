@@ -22,8 +22,24 @@ const app = express();
 app.use(cors())
 // create DB
 
-app.get("/api/temp", (req, res) => {
+app.get("/api/measurements", (req, res) => {
   let sql = "SELECT * from measurements";
+  db.query(sql, (err, result) => {
+    if (err) throw err;
+    res.send(result);
+  });
+});
+
+app.get("/api/devices", (req, res) => {
+  let sql = "SELECT * from devices";
+  db.query(sql, (err, result) => {
+    if (err) throw err;
+    res.send(result);
+  });
+});
+
+app.get("/api/types", (req, res) => {
+  let sql = "SELECT * from types";
   db.query(sql, (err, result) => {
     if (err) throw err;
     res.send(result);

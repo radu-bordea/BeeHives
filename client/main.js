@@ -1,37 +1,71 @@
-async function fetchData() {
-  const url = "http://localhost:5000/api/temp";
-  const response = await fetch(url);
+async function fetchDataMeasurements() {
+  const urlMeasurements = "http://localhost:5000/api/measurements";
+  const response = await fetch(urlMeasurements);
   const datapoints = await response.json();
   return datapoints;
 }
 
-fetchData().then((datapoints) => {
-  const temps = [];
-  const weights = [];
-  const humidity = [];
+async function fetchDataTypes() {
+  const urlTypes = "http://localhost:5000/api/types";
+  const response = await fetch(urlTypes);
+  const datapoints = await response.json();
+  console.log(datapoints);
+  // console.log(datapoints[0].typeName);
+  return datapoints;
+}
+fetchDataTypes()
 
-  const values = datapoints.map(function (index) {
-    if(index.deviceID === 1){
-      return temps.push(index.value);
-    }
-    if(index.deviceID === 2){
-      return weights.push(index.value);
-    }
-    if(index.deviceID === 3){
-      return humidity.push(index.value);
-    }
-  });
+async function fetchDataDevices() {
+  const urlDevices = "http://localhost:5000/api/devices";
+  const response = await fetch(urlDevices);
+  const datapoints = await response.json();
+  console.log(datapoints);
+  // console.log(datapoints[0]);
+  return datapoints;
+}
+fetchDataDevices()
+
+
+fetchDataMeasurements().then((datapoints) => {
+
+  let deviceIdValues = []
+
+  const devices = datapoints.map(item => item.deviceID)
+  const devicesUnique = [... new Set(devices)];
   
+  const listDevices = document.getElementById("list-of-devices"); 
+  console.log(listDevices);
+
+  for(const i of devicesUnique){
+    console.log(datapoints)
+    const h6 = document.createElement("h6");
+    h6.classList.add("h6style");
+    const h6Content = document.createTextNode("Device ID: " + i);
+    h6.appendChild(h6Content);
+    listDevices.appendChild(h6)
+  }
+
+  const searchDevice = document.getElementById("searchDevice");
+  const btnSearchDevice = document.getElementById("btnSearchDevice");
+
+  btnSearchDevice.addEventListener('click', () => {
+    deviceIdValues=[]
+      const deviceSearched = datapoints.map((item) => {
+        if(item.deviceID === Number(searchDevice.value)){
+          deviceIdValues.push(item.value)
+          console.log(item.value)
+        }
+      });
+      showChart(deviceIdValues)
+  })
+
   const dates = datapoints.map(function (index) {
     return index.timestamp.slice(0, 10);
   });
   const uniqueDates = [... new Set(dates)]
   
-  console.log(temps);
-  console.log(weights);
-  console.log(humidity);
-  console.log(uniqueDates);
-  console.log(dates);
+  // console.log(uniqueDates);
+  // console.log(dates);
 
   let myChart = document.getElementById("myChart");
   let openTemp = false;
@@ -41,60 +75,15 @@ fetchData().then((datapoints) => {
   let openHumidity = false;
   let newHumidity = [];
 
-  
-  const checkboxTemp = document.getElementById("checkboxTemp");
-  checkboxTemp.addEventListener("click", () => {
-    openTemp = !openTemp;
-    if (openTemp) {
-      newTemps = temps;
-    } else {
-      newTemps = []
-    }
-    showChart(newTemps, newWeights, newHumidity)
-  });
-
-  const checkboxWeight = document.getElementById("checkboxWeight");
-  checkboxWeight.addEventListener("click", () => {
-    openWeight = !openWeight;
-    if (openWeight) {
-      newWeights = weights;
-    } else {
-      newWeights = []
-    }
-    showChart(newTemps, newWeights, newHumidity)
-  });
-
-  const checkboxHumidity = document.getElementById("checkboxHumidity");
-  checkboxHumidity.addEventListener("click", () => {
-    openHumidity = !openHumidity;
-    if (openHumidity) {
-      newHumidity = humidity;
-    } else {
-      newHumidity = []
-    }
-    showChart(newTemps, newWeights, newHumidity)
-  })
-
-
-  function showChart(temps, weights, humidity){
+  function showChart(deviceIdValues){
     new Chart("myChart", {
       type: "line",
       data: {
         labels: uniqueDates,
         datasets: [
           {
-            data: temps,
+            data: deviceIdValues,
             borderColor: "red",
-            fill: false,
-          },
-          {
-            data: weights,
-            borderColor: "green",
-            fill: false,
-          },
-          {
-            data: humidity,
-            borderColor: "blue",
             fill: false,
           },
         ],
