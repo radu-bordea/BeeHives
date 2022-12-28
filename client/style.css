@@ -68,7 +68,7 @@ p {
 }
 
 .devicelist{
-    height: 40rem;
+    height: 50rem;
     overflow: scroll;
 }
 
@@ -93,3 +93,9 @@ p {
     height: 40px;
     padding: 5px;
 }
+
+#colorPalette{
+    text-align: center;
+    padding: 20px;
+}
+

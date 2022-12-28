@@ -23,7 +23,12 @@ app.use(cors())
 // create DB
 
 app.get("/api/measurements", (req, res) => {
-  let sql = "SELECT * from measurements";
+  let sql = `SELECT m.deviceID, d.typeID, t.typeName, m.value, m.timestamp FROM beehive.measurements as m
+JOIN beehive.devices as d
+ON d.deviceID = m.deviceID
+JOIN beehive.types as t
+on t.typeID = d.typeID 
+ORDER BY deviceID`;
   db.query(sql, (err, result) => {
     if (err) throw err;
     res.send(result);
