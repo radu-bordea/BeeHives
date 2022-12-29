@@ -1,20 +1,4 @@
-/* async function fetchDataTypes() {
-  const urlTypes = "http://localhost:5000/api/types";
-  const response = await fetch(urlTypes);
-  const datapoints = await response.json();
-  // console.log(datapoints[0].typeName);
-  return datapoints;
-}
-fetchDataTypes()
 
-async function fetchDataDevices() {
-  const urlDevices = "http://localhost:5000/api/devices";
-  const response = await fetch(urlDevices);
-  const datapoints = await response.json();
-  // console.log(datapoints[0]);
-  return datapoints;
-}
-fetchDataDevices() */
 async function fetchDataMeasurements() {
   const urlMeasurements = "http://localhost:5000/api/measurements";
   const response = await fetch(urlMeasurements);
@@ -23,9 +7,7 @@ async function fetchDataMeasurements() {
   return datapoints;
 }
 
-
 fetchDataMeasurements().then((datapoints) => {
-
   const devices = datapoints.map(item => item.deviceID)
   const types = datapoints.map(item => item.typeID)
   const typeNames = datapoints.map(item => item.typeName)
