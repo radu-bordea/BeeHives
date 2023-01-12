@@ -16,14 +16,14 @@
         <h1>Create New Keeper/Company</h1><br>
         <div class="imp">
             <label for="typeName">Keeper/Company Name</label><br>
-            <input type="text" name="typeName" id="typeName" placeholder=" name/brand ">
+            <input type="text" name="typeName" id="keeperName" placeholder=" name/brand" required>
         </div>
         <div class="imp">
             <label for="unit">Contacts</label><br>
-            <input type="text" name="unit" id="unit" placeholder=" email ">
+            <input type="text" name="unit" id="contacts" placeholder=" email/phone " required>
         </div>
         <div class="imp mt-3" id="btn">
-            <button type="button" class="btn btn-info btn-sm">Send</button>
+            <button id="btn" type="button" class="btn btn-info btn-sm">Send</button>
         </div>
         <a id="home" href="index.html">Home Page</a>
     </form>
@@ -32,5 +32,40 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+  
+  <!-- sending data to database nia Post endpoints with NodeJS -->
+  <script>
+    const btn = document.getElementById("btn");
+    btn.addEventListener('click', () => {
+
+        let keeperName = document.getElementById("keeperName").value;
+        let contacts = document.getElementById("contacts").value;
+
+        if(!keeperName || !contacts){
+            alert("Please fill the input");
+        }else{
+            console.log(keeperName);
+            console.log(contacts);
+            const url = "http://localhost:5000/api/keepers";
+            
+            try {
+                const body = {keeperName, contacts};
+                const response = fetch(url, {
+                    method: "POST",
+                    headers: {"Content-Type": "application/json"},
+                    body: JSON.stringify(body)
+                }); 
+            } catch (err) {
+                console.error(err.message);
+            }
+
+
+            
+        }
+
+    })
+
+
+  </script>
 </body>
 </html>

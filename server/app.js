@@ -62,7 +62,7 @@ app.post("/api/keepers", async (req, res) => {
   db.query(
     "INSERT INTO beehive.keepers (keeperName, contacts) VALUES(?, ?)",
     [keeperName, contacts],
-    (err, reult) => {
+    (err, result) => {
       if (err) {
         console.log(err);
       } else {
