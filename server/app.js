@@ -71,3 +71,48 @@ app.post("/api/keepers", async (req, res) => {
     }
   );
 });
+
+app.post("/api/types", async (req, res) => {
+  const { typeName, unit, precission } = req.body;
+  db.query(
+    "INSERT INTO beehive.types (typeName, unit, precission) VALUES(?, ?, ?)",
+    [typeName, unit, precission],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.send("POSTED");
+      }
+    }
+  );
+});
+
+app.post("/api/locations", async (req, res) => {
+  const { lng, lat, locationName } = req.body;
+  db.query(
+    "INSERT INTO beehive.locations (lng, lat, locationName) VALUES(?, ?, ?)",
+    [lng, lat, locationName],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.send("POSTED");
+      }
+    }
+  );
+});
+
+app.post("/api/devices", async (req, res) => {
+  const { locationID, keeperID, typeID, address } = req.body;
+  db.query(
+    "INSERT INTO beehive.devices (locationID, keeperID, typeID, address) VALUES(?, ?, ?, ?)",
+    [locationID, keeperID, typeID, address],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.send("POSTED");
+      }
+    }
+  );
+});

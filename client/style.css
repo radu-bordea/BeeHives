@@ -99,3 +99,17 @@ p {
     padding: 20px;
 }
 
+.date{
+    width: 120px;
+    box-shadow: 2px 2px 2px black;
+    cursor: pointer;
+}
+
+.dateSpan{
+    padding: 3px;
+    width: 100px;
+    background: black;
+    color: wheat;
+    border-radius: 2px;
+    cursor: alias;
+}
