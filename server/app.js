@@ -116,3 +116,20 @@ app.post("/api/devices", async (req, res) => {
     }
   );
 });
+
+
+app.post("/api/users", async (req, res) => {
+  const { userName, email, password } = req.body;
+  db.query(
+    "INSERT INTO beehive.users (userName, email, password) VALUES (?, ?, ?)",
+    [userName, email, password],
+    (err, result) => {
+      if(err){
+        console.log(err);
+      }else {
+        res.send("USER CREATED");
+      }
+    }
+  )
+
+})

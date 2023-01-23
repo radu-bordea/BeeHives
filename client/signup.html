@@ -1,0 +1,60 @@
+<html>
+  <head>
+    <title>Authentication</title>
+    <link rel="stylesheet" href="signup.css" />
+  </head>
+
+  <body>
+    <div id="login-box">
+      <div class="left">
+        <h1 id="status">Sign up</h1>
+        <input
+          type="text"
+          id="userName"
+          name="username"
+          placeholder="username"
+        />
+        <input type="text" id="email" name="email" placeholder="E-mail" />
+        <input
+          type="password"
+          id="password"
+          name="password"
+          placeholder="Password"
+        />
+        <input type="submit" id="btn" name="signup_submit" value="Sign up" /><br><br>
+        <a id="home" href="index.html">Home Page</a>
+      </div>
+    </div>
+
+    <script>
+      const btn = document.getElementById("btn");
+      btn.addEventListener("click", () => {
+        let userName = document.getElementById("userName").value;
+        let email = document.getElementById("email").value;
+        let password = document.getElementById("password").value;
+
+        if (!userName || !email || !password) {
+          alert("Please fill the input");
+        } else {
+         
+          console.log(typeof userName);
+          console.log(typeof email);
+          console.log(typeof password);
+
+          const url = "http://localhost:5000/api/users";
+
+          try {
+            const body = { userName, email, password };
+            const response = fetch(url, {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(body),
+            });
+          } catch (err) {
+            console.error(err.message);
+          }
+        }
+      });
+    </script>
+  </body>
+</html>

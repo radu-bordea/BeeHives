@@ -22,6 +22,18 @@
       <ul class="navbar-nav ml-auto">
         <li class="nav-item active">
           <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+              Activity
+            </a>
+            <div class="dropdown-menu">
+              <button class="dropdown-item" id="graph">Graph</button>
+              <a class="dropdown-item" href="measType.html">Register Measurement Type</a>
+              <a class="dropdown-item" href="location.html">Register Location</a>
+              <a class="dropdown-item" href="keeper.html">Register Keeper</a>
+              <a class="dropdown-item" href="device.html">Register Device</a>
+            </div>
+          </li>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">About</a>
@@ -29,15 +41,8 @@
         <li class="nav-item">
           <a class="nav-link" href="#">Contact</a>
         </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
-              Authentication
-            </a>
-            <div class="dropdown-menu">
-              <a class="dropdown-item" href="signup.html">Sign up</a>
-              <a class="dropdown-item" href="signin.html">Sign in</a>
-            </div>
-          </li>
+        <li class="nav-item">
+          <a class="nav-link" href="./index.html">Sign out</a>
         </li>
         </ul>
     </div>
@@ -51,6 +56,12 @@
           <div class="input-group-append">
             <button id="btnSearchDevice" class="btn btn-outline-secondary">Click</button>
           </div>
+        </div>
+        <div>
+          <label for="from-date"><span class="dateSpan">From:</span></label> <input class="date" id="from-date" type="date" placeholder="dd/mm/yyyy">
+        </div><br>
+        <div>
+          <label for="till-date"><span class="dateSpan">To&nbsp&nbsp&nbsp&nbsp:</span></label> <input class="date" id="till-date" type="date" placeholder="dd/mm/yyyy">
         </div>
         <br>
       </div>    
