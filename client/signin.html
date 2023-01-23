@@ -21,10 +21,54 @@
           placeholder="Password"
         />
 
-        <input type="submit" id="btn" name="signup_submit" value="Sign in" /><br><br>
+        <input
+          type="submit"
+          id="btn"
+          name="signup_submit"
+          value="Sign in"
+        /><br /><br />
         <a id="home" href="index.html">Home Page</a>
       </div>
-
     </div>
+    <script>
+      const btn = document.getElementById("btn");
+      btn.addEventListener("click", () => {
+        let userName = document.getElementById("userName").value;
+        let password = document.getElementById("password").value;
+        userName = userName.toLowerCase();
+        password = password.toLowerCase();
+
+        if (!userName || !password) {
+          alert("Please fill the input");
+        } else {
+          async function fetchUsers() {
+            const urlUsers = "http://localhost:5000/api/users";
+            const response = await fetch(urlUsers);
+            const users = await response.json();
+            console.log(users);
+            return users;
+          }
+
+          fetchUsers().then((u) => {
+            let logged = false;
+            u.forEach((element) => {
+              if (
+                element.userName === userName &&
+                element.password === password
+              ) {
+                logged = true;
+                if (logged) {
+                  window.location = "./index2.html";
+                  console.log("Login succesful!");
+                  logged = true;
+                } else {
+                  alert("Credentials not valid!");
+                }
+              }
+            });
+          });
+        }
+      });
+    </script>
   </body>
 </html>

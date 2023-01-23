@@ -133,3 +133,12 @@ app.post("/api/users", async (req, res) => {
   )
 
 })
+
+app.get("/api/users", (req, res) => {
+  let sql = "SELECT * from users";
+  db.query(sql, (err, result) => {
+    if (err) throw err;
+    res.send(result);
+  });
+});
+
