@@ -30,6 +30,7 @@
         <a id="home" href="index.html">Home Page</a>
       </div>
     </div>
+    <script src="js/md5.min.js"></script>
     <script>
       const btn = document.getElementById("btn");
       btn.addEventListener("click", () => {
@@ -37,6 +38,7 @@
         let password = document.getElementById("password").value;
         userName = userName.toLowerCase();
         password = password.toLowerCase();
+        password = md5(password)
 
         if (!userName || !password) {
           alert("Please fill the input");

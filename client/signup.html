@@ -25,13 +25,14 @@
         <a id="home" href="index.html">Home Page</a>
       </div>
     </div>
-
+    <script src="js/md5.min.js"></script>
     <script>
       const btn = document.getElementById("btn");
       btn.addEventListener("click", () => {
         let userName = document.getElementById("userName").value;
         let email = document.getElementById("email").value;
         let password = document.getElementById("password").value;
+        password = md5(password);
 
         if (!userName || !email || !password) {
           alert("Please fill the input");
