@@ -20,3 +20,58 @@ Sedan skulle  vi skapa en open API som tar emot data från IOT och de kommer att
 Graferna kommer att skapas på applikationens frontend med hjälp av en av följande Javascript  bibliotek D3.js, Charts.js, Plotly.
 
 Budget: None
+
+Database queries instructions:
+
+CREATE SCHEMA beehive;
+
+CREATE TABLE `users` (
+  `userID` int NOT NULL AUTO_INCREMENT,
+  `userName` varchar(45) NOT NULL,
+  `email` varchar(45) NOT NULL,
+  `password` varchar(45) NOT NULL,
+  PRIMARY KEY (`userID`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `types` (
+  `typeID` int NOT NULL AUTO_INCREMENT,
+  `typeName` varchar(45) NOT NULL,
+  `unit` varchar(45) NOT NULL,
+  `precission` varchar(45) NOT NULL,
+  PRIMARY KEY (`typeID`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `locations` (
+  `locationID` int NOT NULL AUTO_INCREMENT,
+  `lng` decimal(11,8) NOT NULL,
+  `lat` decimal(10,8) NOT NULL,
+  `locationName` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`locationID`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `keepers` (
+  `keeperID` int NOT NULL AUTO_INCREMENT,
+  `keeperName` varchar(45) NOT NULL,
+  `contacts` varchar(45) NOT NULL,
+  PRIMARY KEY (`keeperID`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `devices` (
+  `deviceID` int NOT NULL AUTO_INCREMENT,
+  `locationID` int DEFAULT NULL,
+  `keeperID` int DEFAULT NULL,
+  `typeID` int DEFAULT NULL,
+  `address` varchar(45) NOT NULL,
+  PRIMARY KEY (`deviceID`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `measurements` (
+  `measurementID` int NOT NULL AUTO_INCREMENT,
+  `deviceID` int DEFAULT NULL,
+  `value` decimal(10,8) NOT NULL,
+  `timestamp` datetime DEFAULT NULL,
+  `registerTimestamp` datetime DEFAULT NULL,
+  PRIMARY KEY (`measurementID`),
+  KEY `fk_deviceID` (`deviceID`,`measurementID`)
+) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
