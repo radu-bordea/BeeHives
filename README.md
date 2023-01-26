@@ -21,7 +21,11 @@ Graferna kommer att skapas på applikationens frontend med hjälp av en av följ
 
 Budget: None
 
-Database queries instructions:
+INSTRUCTIONS:
+
+1. Clone the Github link: "git clone https://github.com/radu-bordea/BeeHives.git"
+ 
+2. Database queries instructions which you find in the Read.me file:
 
 CREATE SCHEMA beehive;
 
@@ -75,3 +79,14 @@ CREATE TABLE `measurements` (
   KEY `fk_deviceID` (`deviceID`,`measurementID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+3. Open the project in an IDE til example Visual Studio Code
+
+4. Open a terminal and change directory to server folder "cd server"
+
+5. Run "node app.js"
+ 
+6 Open "index.html" in the Browser for example open with live server on Google Chrome
+
+7. Try the application by register an user and login.
+
+Thank you!
